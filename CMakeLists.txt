@@ -3,4 +3,14 @@ project(YandexTaxiPlot)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(YandexTaxiPlot main.cpp "../../Library/Mobile Documents/com~apple~CloudDocs/Polytech/C++/3Сем/Курсач/YandexTaxiPlot/Canvas.hpp" "../../Library/Mobile Documents/com~apple~CloudDocs/Polytech/C++/3Сем/Курсач/YandexTaxiPlot/Interface/RenderObject.hpp" "../../Library/Mobile Documents/com~apple~CloudDocs/Polytech/C++/3Сем/Курсач/YandexTaxiPlot/RenderObjects/Plot/Plot.hpp" "../../Library/Mobile Documents/com~apple~CloudDocs/Polytech/C++/3Сем/Курсач/YandexTaxiPlot/Primitive/Rect.hpp" "../../Library/Mobile Documents/com~apple~CloudDocs/Polytech/C++/3Сем/Курсач/YandexTaxiPlot/Primitive/Point.hpp" "../../Library/Mobile Documents/com~apple~CloudDocs/Polytech/C++/3Сем/Курсач/YandexTaxiPlot/RenderObjects/Plot/PlotLine.hpp" "../../Library/Mobile Documents/com~apple~CloudDocs/Polytech/C++/3Сем/Курсач/YandexTaxiPlot/RenderObjects/ProgressBar.hpp")
+add_executable(YandexTaxiPlot
+        main.cpp
+        Interfsaces/RenderObject.hpp
+        Primitives/Canvas.hpp
+        Primitives/Point.hpp
+        Primitives/Rect.hpp
+        RenderObjects/ProgressBar.hpp
+        RenderObjects/Text.hpp
+        RenderObjects/Plot/Plot.hpp
+        RenderObjects/Plot/PlotLine.hpp
+        )

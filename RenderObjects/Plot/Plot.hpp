@@ -7,8 +7,8 @@
 
 #include <vector>
 
-#include "../../../../Library/Mobile Documents/com~apple~CloudDocs/Polytech/C++/3Сем/Курсач/YandexTaxiPlot/Primitive/Rect.hpp"
-#include "../../../../Library/Mobile Documents/com~apple~CloudDocs/Polytech/C++/3Сем/Курсач/YandexTaxiPlot/Interface/RenderObject.hpp"
+#include "../../Primitives/Rect.hpp"
+#include "../../Interfsaces/RenderObject.hpp"
 #include "PlotLine.hpp"
 
 typedef long long int time_;

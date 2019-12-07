@@ -6,7 +6,7 @@
 #define YANDEXTAXIPLOT_CANVAS_HPP
 
 #include <vector>
-#include "Interface/RenderObject.hpp"
+#include "../Interfsaces/RenderObject.hpp"
 
 //это полотно -- текущий экран отрисоваки (вообще их можно нагенерить сколько угодно), их можно включать и выключать
 class Canvas
