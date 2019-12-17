@@ -4,7 +4,7 @@ project(YTaxiPlot)
 set(CMAKE_CXX_STANDARD 17)
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 
-add_executable(YTaxiPlot main.cpp Plot.hpp)
+add_executable(YTaxiPlot main.cpp plot.hpp plot.cpp graph.cpp details.hpp details.cpp)
 
 target_link_libraries(YTaxiPlot sfml-graphics sfml-audio)
 

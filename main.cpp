@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <boost/filesystem.hpp>
 
+void graph();
 
 struct vector2li
 {
@@ -17,7 +18,10 @@ float width = 4000;
 void draw(std::vector<vector2li> v)
 {
 
-  sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML works!");
+  sf::RenderWindow window(sf::VideoMode(1000, 1000, 128), "SFML works!");
+
+  window.clear(sf::Color(240, 248, 255));
+
 
   int maxX = std::max_element(v.begin(), v.end(), [](const vector2li& e1, const vector2li& e2){return e1.x < e2.x;})->x;
   int maxY = std::max_element(v.begin(), v.end(), [](const vector2li& e1, const vector2li& e2){return e1.y < e2.y;})->y;
@@ -79,7 +83,6 @@ void draw(std::vector<vector2li> v)
     std::vector<sf::Vertex> vertToDraw = vert;
 
 
-
     sf::Event event;
     while (window.pollEvent(event))
     {
@@ -101,23 +104,25 @@ int main()
 {
   std::vector<vector2li> t;
 
+
+
+  graph();
+
+
+
+
   std::string path = boost::filesystem::current_path().string() + "/snapShot/";
-  std::cout << path << "\n";
+  boost::filesystem::directory_entry paths;
   for (const auto & entry : boost::filesystem::directory_iterator(path))
   {
-    //std::cout << entry.path().string() << "\n";
     std::ifstream file(entry.path().string());
+
     long int time = 0;
     file >> time;
-    //std::cout << time << " ";
     int price = 0;
     file >> price;
-    //std::cout << price << "\n";
 
     auto v2li = vector2li{time, price};
-
-    //std::cout << v2li.x << " " << v2li.y  << "\n";
-    //std::cout << std::asctime(std::localtime(&time)) << " " << price << "\n";
 
     if(v2li.x > 10)
       t.push_back(v2li);
@@ -128,16 +133,7 @@ int main()
   std::sort(t.begin(), t.end(), [](vector2li lhs, vector2li rhs) { return lhs.x < rhs.x;});
 
 
-
-  std::vector<vector2li> t2;
-  for(int i = 5; i < t.size() - 5; i++)
-  {
-    long int s = (t.at(i-4).y + t.at(i-3).y + t.at(i-2).y + t.at(i-1).y + t.at(i).y + t.at(i+1).y + t.at(i+2).y + t.at(i+3).y + t.at(i+4).y)/9;
-    t2.push_back(vector2li{t.at(i).x, s});
-  }
-
-
-  draw(t);
-  draw(t2);
+  //draw(t);
+  //draw(t2);
   return 0;
 }
