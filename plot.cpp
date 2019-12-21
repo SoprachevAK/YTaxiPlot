@@ -20,7 +20,7 @@ Plot::Plot(vecPoint &points, int width, int height) :
   height_(height),
   scale_(4)
 {
-  window_ = new sf::RenderWindow(sf::VideoMode(width_, height_), "Mne Pohui");
+  window_ = new sf::RenderWindow(sf::VideoMode(width_, height_), "Price plot");
 
   maxX = points_.back().x;
   minX = points_.front().x;

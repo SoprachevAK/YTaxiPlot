@@ -14,7 +14,7 @@ private:
   void draw();
   void drawLine();
   sf::Vector2f getMousePos();
-  float getIntersect(float pos);
+  sf::Vector2<long> getIntersect(float pos);
   void reDraw();
   void updateKeyEvent(sf::Event ev);
   void update();
