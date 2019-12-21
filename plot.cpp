@@ -11,6 +11,7 @@ int minY = 0;
 
 sf::CircleShape circle;
 sf::Text priceText;
+sf::Text dateText;
 const int circleR = 10;
 
 Plot::Plot(vecPoint &points, int width, int height) :
@@ -41,6 +42,9 @@ Plot::Plot(vecPoint &points, int width, int height) :
   font.loadFromFile("Arial.ttf");
   priceText = sf::Text("-", font);
   priceText.setFillColor(sf::Color::White);
+
+  dateText = sf::Text("-", font);
+  dateText.setFillColor(sf::Color::White);
   draw();
 }
 
@@ -83,19 +87,18 @@ sf::Vector2f Plot::getMousePos()
   return sf::Vector2f{1.0f * pos.x * width_ / wSize.x, 1.0f * pos.y * width_ / wSize.y};
 }
 
-float Plot::getIntersect(float pos)
+sf::Vector2<long> Plot::getIntersect(float pos)
 {
   for (int i = 0; i < points_.size(); ++i)
   {
     float p = static_cast<float>(points_.at(i).x - minX) * scale_ * (width_) / (maxX - minX) + offset_;
     if(p > pos)
     {
-      return points_.at(i).y;
+      return points_.at(i);
 
     }
   }
-
-  return 500;
+  return sf::Vector2<long>(0, -404);
 }
 
 void Plot::drawLine()
@@ -108,13 +111,20 @@ void Plot::drawLine()
   mouseMovedLine.emplace_back(sf::Vector2f(posX, height_ - offsetBotton), sf::Color::Red);
   mouseMovedLine.emplace_back(sf::Vector2f(posX, offsetTop), sf::Color::Red);
 
-  float price = getIntersect(posX);
+  auto intersect = getIntersect(posX);
   int h = height_ - offsetTop - offsetBotton;
-  float posY =  -offsetBotton + height_ - static_cast<float>(price - minY) * h / (maxY - minY);
-  priceText.setString(std::to_string((int)price));
-  priceText.setPosition(posX - circleR, offsetTop - 50);
-  circle.setPosition(posX - circleR, posY - circleR);
+  float posY =  -offsetBotton + height_ - static_cast<float>(intersect.y - minY) * h / (maxY - minY);
+
+
+  priceText.setString(std::to_string((int)intersect.y) + " rub");
+  priceText.setPosition(posX - circleR - 30, offsetTop - 50);
   window_->draw(priceText);
+
+  dateText.setString(std::asctime(std::localtime(&intersect.x)));
+  dateText.setPosition(posX - circleR - 150, offsetTop - 90);
+  window_->draw(dateText);
+
+  circle.setPosition(posX - circleR, posY - circleR);
   window_->draw(circle);
   window_->draw(&mouseMovedLine[0], mouseMovedLine.size(), sf::Lines);
 }
@@ -181,6 +191,7 @@ void Plot::onMouseWheelMove(sf::Event ev)
 }
 
 void Plot::updateKeyEvent(sf::Event ev)
+
 {
   switch (ev.type)
   {
@@ -211,7 +222,7 @@ void Plot::update()
     mouseDelta = 0;
   }
 
-  offset_ = std::clamp(offset_, -width_ * (scale_ - 1) - 100, .0f);
+  offset_ = std::clamp(offset_, -width_ * (scale_ - 1), .0f);
 
   reDraw();
 }
